@@ -1,5 +1,6 @@
 # IDE
 .idea
+.vite
 
 # Dependency directories
 node_modules/
