@@ -1,0 +1,5 @@
+POST http://localhost:8080/api/users/auth HTTP/1.1 content-type: application/json
+
+{
+"email": "asenata.luczak@gmail.com", "password": "qwerty"
+}
