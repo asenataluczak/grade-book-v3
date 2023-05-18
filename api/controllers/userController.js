@@ -9,7 +9,7 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ where: { email: req.body.email } });
 
   if (user && comparePassword(req.body.password, user.password)) {
-    generateToken(res, user._id);
+    generateToken(res, user.id);
     return res.status(201).json({ message: `Login successfull` });
   }
 
@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   if (user) {
-    generateToken(res, user._id);
+    generateToken(res, user.id);
     return res
       .status(201)
       .json({ message: `User ${req.body.email} created successfully` });
@@ -45,7 +45,19 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = (req, res) => {
+  res.cookie("jwt", "", { httpOnly: true, expires: new Date(0) });
   res.status(200).json({ message: "Logged out successfully" });
 };
 
-export { authUser, registerUser, logoutUser };
+const getUserProfile = (req, res) => {
+  const data = req.user.dataValues;
+  const user = {
+    id: data.id,
+    fullname: data.fullname,
+    email: data.email,
+    role: data.role,
+  };
+  res.status(200).json(user);
+};
+
+export { authUser, registerUser, logoutUser, getUserProfile };
