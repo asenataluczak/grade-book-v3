@@ -1,5 +1,7 @@
-POST http://localhost:8080/api/users/auth HTTP/1.1 content-type: application/json
+###
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
 
 {
-"email": "asenata.luczak@gmail.com", "password": "qwerty"
+"fullname": "uga buga2", "email": "uga.buga2@mail.com", "password": "qwerty", "role":"0"
 }
