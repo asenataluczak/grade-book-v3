@@ -22,9 +22,9 @@ const User = (sequelize, DataTypes) =>
     },
     {
       hooks: {
-        beforeCreate: (user) => encrypt(user),
-        beforeUpdate: (user) => encrypt(user),
+        beforeCreate: (user) => encrypt(user)
       },
     }
   );
+
 export default User;

@@ -1,11 +1,20 @@
 import asyncHandler from "express-async-handler";
 import { db } from "../models/index.js";
 import generateToken from "../config/generate-token.js";
+import { comparePassword, encrypt } from "../config/password-bcrypt.cjs";
 
 const User = db.users;
 
 const authUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "Auth user" });
+  const user = await User.findOne({ where: { email: req.body.email } });
+
+  if (user && comparePassword(req.body.password, user.password)) {
+    generateToken(res, user._id);
+    return res.status(201).json({ message: `Login successfull` });
+  }
+
+  res.status(401);
+  throw new Error("Invalid credentials");
 });
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -22,13 +31,6 @@ const registerUser = asyncHandler(async (req, res) => {
   if (alreadyExistingUser) {
     res.status(409);
     throw new Error(`User ${req.body.email} already exists`);
-  }
-
-  try {
-    const user = await User.create(data);
-    res.status(200).send(user);
-  } catch (err) {
-    res.status(400).send(err.parent?.text);
   }
 
   if (user) {
