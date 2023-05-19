@@ -1,11 +1,11 @@
-import React, { ChangeEventHandler } from "react";
+import React from "react";
 
 interface LoginFormProps {
   password: string;
   setPassword: (password: string) => void;
   email: string;
   setEmail: (email: string) => void;
-  submitHandler: () => void;
+  submitHandler: (e) => void;
 }
 
 function LoginForm({
@@ -13,8 +13,14 @@ function LoginForm({
   setPassword,
   email,
   setEmail,
-  submitHandler,
+  submit,
 }: LoginFormProps) {
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    submit(e);
+  };
+
   return (
     <div className="w-full md:w-3/4 p-6 bg-white rounded-md shadow-md">
       <h1 className="text-3xl font-semibold text-center text-primary">

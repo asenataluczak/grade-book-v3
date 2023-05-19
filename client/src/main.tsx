@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginScreen from "./screens/LoginScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
     <React.StrictMode>
+      <ToastContainer />
       <RouterProvider router={router} />
     </React.StrictMode>
   </Provider>
