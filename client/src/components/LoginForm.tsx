@@ -1,12 +1,26 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 
-function LoginForm(props) {
+interface LoginFormProps {
+  password: string;
+  setPassword: (password: string) => void;
+  email: string;
+  setEmail: (email: string) => void;
+  submitHandler: () => void;
+}
+
+function LoginForm({
+  password,
+  setPassword,
+  email,
+  setEmail,
+  submitHandler,
+}: LoginFormProps) {
   return (
     <div className="w-full md:w-3/4 p-6 bg-white rounded-md shadow-md">
       <h1 className="text-3xl font-semibold text-center text-primary">
         Logowanie
       </h1>
-      <form className="mt-6">
+      <form onSubmit={submitHandler} className="mt-6">
         <div className="mb-6">
           <label
             htmlFor="email"
@@ -17,6 +31,8 @@ function LoginForm(props) {
           <input
             type="email"
             className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-purple-400 focus:ring-primary focus:outline-none focus:ring-2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-6">
@@ -29,6 +45,8 @@ function LoginForm(props) {
           <input
             type="password"
             className="block w-full px-4 py-2 mt-2 border rounded-md focus:border-purple-400 focus:ring-primary focus:outline-none focus:ring-2"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mt-6">
