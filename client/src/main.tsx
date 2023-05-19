@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import LoginScreen from "./screens/LoginScreen";
+import DashboardScreen from "./screens/DashboardScreen";
 
 const router = createBrowserRouter([
     {
@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     },
     {
         path: "login",
-        element: <Login />,
+        element: <LoginScreen />,
     },
     {
         path: "dashboard",
-        element: <Dashboard />
+        element: <DashboardScreen />
     },
 ]);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
 
-function Dashboard(props) {
+function DashboardScreen(props) {
     return (
         <div>DASHBOARD
         <Outlet/>
@@ -9,4 +9,4 @@ function Dashboard(props) {
     );
 }
 
-export default Dashboard;
+export default DashboardScreen;
