@@ -1,0 +1,26 @@
+###
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+"fullname": "uga buga4", "email": "uga.buga4@mail.com", "password": "qwerty", "role":"0"
+}
+
+###
+POST http://localhost:8080/api/users/auth
+Content-Type: application/json
+
+{
+  "email": "uga.buga4@mail.com", "password": "qwerty"
+}
+
+###
+POST http://localhost:8080/api/users/logout
+Content-Type: application/json
+
+{
+}
+
+###
+GET http://localhost:8080/api/users/profile
+Accept: application/json
