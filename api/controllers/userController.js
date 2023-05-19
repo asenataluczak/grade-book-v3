@@ -10,7 +10,9 @@ const authUser = asyncHandler(async (req, res) => {
 
   if (user && comparePassword(req.body.password, user.password)) {
     generateToken(res, user.id);
-    return res.status(201).json({ message: `Login successfull` });
+    return res
+      .status(201)
+      .json({ fullname: user.fullname, email: user.email, role: user.role });
   }
 
   res.status(401);
