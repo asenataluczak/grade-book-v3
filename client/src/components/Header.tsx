@@ -2,6 +2,7 @@ import React from "react";
 import { Bars3Icon, UserIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import {Roles} from "../utils";
 
 export default function Header({ isOpen, setIsOpen, userInfo, logout }) {
   return (
@@ -41,7 +42,7 @@ export default function Header({ isOpen, setIsOpen, userInfo, logout }) {
           <Menu.Items className="absolute right-0 p-2 z-50 mt-2 w-56 origin-top-right bg-white rounded-md divide-y divide-gray-300 shadow-lg ring-1 ring-gray-300 focus:outline-none">
             <div className="p-2 text-primary font-semibold">
               <div>{userInfo ? userInfo.fullname : "John Doe"}</div>
-              <div>{userInfo ? userInfo.role : "Admin"}</div>
+              <div>{userInfo ? Roles[userInfo.role] : "Admin"}</div>
             </div>
             <div className="py-2 space-y-1">
               <Menu.Item>

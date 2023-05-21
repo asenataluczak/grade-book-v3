@@ -15,6 +15,9 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       >
         <article className="relative w-full max-w-lg pb-10 p-2 flex flex-col space-y-2 h-full">
           <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
+            Moje oceny
+          </button>
+          <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
             Oceny
           </button>
           <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">

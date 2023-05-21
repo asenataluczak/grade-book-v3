@@ -8,6 +8,8 @@ import LoginScreen from "./screens/LoginScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import Protected from "./components/Protected";
+import { isLoggedIn } from "./utils";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardScreen />,
+    element: (
+      <Protected condition={isLoggedIn}>
+        <DashboardScreen />
+      </Protected>
+    ),
   },
 ]);
 
