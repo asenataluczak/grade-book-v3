@@ -8,7 +8,12 @@ const User = db.users;
 const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ where: { email: req.body.email } });
 
-  if (user && comparePassword(req.body.password, user.password)) {
+  const ifCorrectPassword = await comparePassword(
+    req.body.password,
+    user.password
+  );
+
+  if (user && ifCorrectPassword) {
     generateToken(res, user.id);
     return res
       .status(201)
@@ -34,6 +39,13 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(409);
     throw new Error(`User ${req.body.email} already exists`);
   }
+
+  const user = await User.create({
+    fullname: data.fullname,
+    email: data.email,
+    password: data.password,
+    role: data.role,
+  });
 
   if (user) {
     generateToken(res, user.id);
