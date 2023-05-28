@@ -8,12 +8,7 @@ const User = db.users;
 const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ where: { email: req.body.email } });
 
-  const ifCorrectPassword = await comparePassword(
-    req.body.password,
-    user.password
-  );
-
-  if (user && ifCorrectPassword) {
+  if (user && (await comparePassword(req.body.password, user.password))) {
     generateToken(res, user.id);
     return res
       .status(201)
