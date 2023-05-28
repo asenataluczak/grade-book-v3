@@ -29,11 +29,13 @@ function LoginScreen() {
       dispatch(setCredentials({ ...res }));
       navigate("/dashboard");
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      toast.error(
+        err?.data?.message || err.error || "Error status: " + err.status
+      );
     }
   };
   return (
-    <div className="relative flex flex-col items-center h-screen overflow-hidden mx-2">
+    <div className="relative flex flex-col items-center h-screen overflow-hidden mx-auto max-w-screen-sm">
       <img src="logo.png" alt="Logo" className="my-7 w-3/4 sm:w-1/2" />
       <LoginForm
         email={email}

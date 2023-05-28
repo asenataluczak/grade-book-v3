@@ -8,9 +8,11 @@ const User = db.users;
 const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ where: { email: req.body.email } });
 
-  if (user && comparePassword(req.body.password, user.password)) {
+  if (user && (await comparePassword(req.body.password, user.password))) {
     generateToken(res, user.id);
-    return res.status(201).json({ message: `Login successfull` });
+    return res
+      .status(201)
+      .json({ fullname: user.fullname, email: user.email, role: user.role });
   }
 
   res.status(401);
@@ -32,6 +34,13 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(409);
     throw new Error(`User ${req.body.email} already exists`);
   }
+
+  const user = await User.create({
+    fullname: data.fullname,
+    email: data.email,
+    password: data.password,
+    role: data.role,
+  });
 
   if (user) {
     generateToken(res, user.id);

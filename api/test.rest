@@ -3,7 +3,7 @@ POST http://localhost:8080/api/users/register
 Content-Type: application/json
 
 {
-"fullname": "uga buga4", "email": "uga.buga4@mail.com", "password": "qwerty", "role":"0"
+"fullname": "teacher teacher", "email": "teacher@teacher.com", "password": "qwerty", "role":"1"
 }
 
 ###
