@@ -17,7 +17,7 @@ export default function Header({ isOpen, setIsOpen, userInfo, logout }) {
           <Bars3Icon className="h-6 w-6" />
         )}
       </button>
-      <img src="logo.png" alt="Logo" />
+      <img src="/logo.png" alt="Logo" />
       <h1 className="text-3xl font-semibold md:flex hidden self-center">
         <span className="text-primary">Dziennikus</span>
         <span className="text-accent">Maksimus</span>

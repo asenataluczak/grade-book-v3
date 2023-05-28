@@ -1,14 +1,20 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-const Protected = ({ condition, children }) => {
+const Protected = ({ conditions, fallback, children }) => {
   const { userInfo } = useSelector((state) => state.auth);
 
-  if (!condition(userInfo)) {
-    return <Navigate to="/login" replace />;
+  let result = 0;
+  conditions.forEach((condition) => {
+    if (condition(userInfo)) {
+      return ++result;
+    }
+  });
+  if (result) {
+    return children;
   }
-  return children;
+  return <Navigate to={`/${fallback}`} replace />;
 };
 
 export default Protected;

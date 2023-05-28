@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { isAdmin, isStudent } from "../utils";
 
-export default function Sidebar({ isOpen, setIsOpen }) {
+export default function Sidebar({ isOpen, setIsOpen, userInfo }) {
   return (
     <main
       className={
@@ -14,15 +16,27 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         }
       >
         <article className="relative w-full max-w-lg pb-10 p-2 flex flex-col space-y-2 h-full">
-          <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
-            Moje oceny
-          </button>
-          <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
-            Oceny
-          </button>
-          <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
-            Użytkownicy
-          </button>
+          {isStudent(userInfo) && (
+            <Link to={`/dashboard/my-grades`}>
+              <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
+                Moje oceny
+              </button>
+            </Link>
+          )}
+          {!isStudent(userInfo) && (
+            <Link to={`/dashboard/grades`}>
+              <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
+                Oceny
+              </button>
+            </Link>
+          )}
+          {isAdmin(userInfo) && (
+            <Link to={`/dashboard/users`}>
+              <button className="text-left w-full px-4 py-2 tracking-wide transition-colors duration-200 transform rounded-md hover:bg-slate-200">
+                Użytkownicy
+              </button>
+            </Link>
+          )}
         </article>
       </section>
 

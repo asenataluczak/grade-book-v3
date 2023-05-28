@@ -3,21 +3,21 @@ const isLoggedIn = (userInfo) => {
 };
 
 const isAdmin = (userInfo) => {
-  console.log(userInfo.role);
+  return userInfo.role === Roles.Admin;
 };
 
 const isStudent = (userInfo) => {
-  console.log(userInfo.role);
+  return userInfo.role === Roles.Student;
 };
 
 const isTeacher = (userInfo) => {
-  console.log(userInfo.role);
+  return userInfo.role === Roles.Nauczyciel;
 };
 
 enum Roles {
   Admin,
   Nauczyciel,
-  Student
+  Student,
 }
 
 export { isLoggedIn, isAdmin, isTeacher, isStudent, Roles };

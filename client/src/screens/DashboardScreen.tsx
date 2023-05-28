@@ -26,7 +26,7 @@ function DashboardScreen(props) {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}></Sidebar>
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} userInfo={userInfo}></Sidebar>
       <section className="pt-16 relative h-full overflow-y-auto lg:ml-56">
         <div className="m-6">
           <div>

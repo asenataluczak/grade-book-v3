@@ -29,7 +29,9 @@ function LoginScreen() {
       dispatch(setCredentials({ ...res }));
       navigate("/dashboard");
     } catch (err) {
-      toast.error(err?.data?.message || err.error || "Error status: " + err.status);
+      toast.error(
+        err?.data?.message || err.error || "Error status: " + err.status
+      );
     }
   };
   return (
