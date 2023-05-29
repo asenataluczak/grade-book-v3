@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import User from "./UserModel.js";
+import Course from "./CourseModel.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -24,6 +25,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = User(sequelize, DataTypes);
+db.courses = Course(sequelize, DataTypes)
 
 export { db };
 

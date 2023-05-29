@@ -24,3 +24,7 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/users/profile
 Accept: application/json
+
+###
+GET http://localhost:8080/api/courses
+Accept: application/json
