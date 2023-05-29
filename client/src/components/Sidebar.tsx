@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { isAdmin, isStudent } from "../utils";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/20/solid";
+import { useCoursesMutation } from "../slices/coursesApiSlice.js";
+import { setCourses } from "../slices/coursesSlice.js";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Sidebar({ isOpen, setIsOpen, userInfo }) {
-  const courses = [
-    { name: "asdasdasdsa" },
-    { name: "bbbbbbbbbb" },
-    { name: "cccccccccccccc" },
-    { name: "ddddddddddd" },
-    { name: "fffffffffff ffff ffffffffffff fff" },
-  ];
+  const dispatch = useDispatch();
+  const [courses, { isLoading }] = useCoursesMutation();
+
+  const { allCourses } = useSelector((state) => state.courses);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await courses().unwrap();
+      dispatch(setCourses(res));
+    };
+    fetchData().catch((err) =>
+      toast.error(
+        err?.data?.message || err.error || "Error status: " + err.status
+      )
+    );
+  }, [allCourses]);
 
   return (
     <main
@@ -52,9 +65,9 @@ export default function Sidebar({ isOpen, setIsOpen, userInfo }) {
                     />
                   </Disclosure.Button>
                   <Disclosure.Panel className="px-4 relative flex flex-col space-y-1">
-                    {courses.map((course, index) => (
+                    {allCourses.map((course, index) => (
                       <NavLink
-                        to={`/dashboard/grades`}
+                        to={`/dashboard/grades/${course.id}`}
                         key={index}
                         className={({ isActive }) =>
                           isActive ? "font-bold text-primary" : ""
