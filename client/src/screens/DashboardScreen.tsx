@@ -29,12 +29,6 @@ function DashboardScreen(props) {
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} userInfo={userInfo}></Sidebar>
       <section className="pt-16 relative h-full overflow-y-auto lg:ml-56">
         <div className="m-6">
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam
-            amet aut eos excepturi facilis illo illum in molestias nobis qui
-            ratione ut, vero voluptatum! Autem nobis quis reiciendis similique
-            vero.
-          </div>
           <Outlet />
         </div>
       </section>
