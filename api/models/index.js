@@ -2,6 +2,7 @@ import { Sequelize, DataTypes } from "sequelize";
 import User from "./UserModel.js";
 import Course from "./CourseModel.js";
 import dotenv from "dotenv";
+import Grade from "./GradeModel.js";
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -25,7 +26,13 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = User(sequelize, DataTypes);
-db.courses = Course(sequelize, DataTypes)
+db.courses = Course(sequelize, DataTypes);
+db.grades = Grade(sequelize, DataTypes);
+
+db.users.hasMany(db.grades);
+db.courses.hasMany(db.grades);
+db.grades.belongsTo(db.courses);
+db.grades.belongsTo(db.users);
 
 export { db };
 

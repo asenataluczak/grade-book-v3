@@ -4,6 +4,7 @@ import userRoutes from "./routes/userRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import cookieParser from "cookie-parser";
+import gradeRoutes from "./routes/gradeRoutes.js";
 
 dotenv.config();
 const port = process.env.PORT || 8080;
@@ -17,6 +18,7 @@ app.use(cookieParser())
 
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/grades", gradeRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

@@ -15,15 +15,17 @@ export default function Sidebar({ isOpen, setIsOpen, userInfo }) {
   const { allCourses } = useSelector((state) => state.courses);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await courses().unwrap();
-      dispatch(setCourses(res));
-    };
-    fetchData().catch((err) =>
-      toast.error(
-        err?.data?.message || err.error || "Error status: " + err.status
-      )
-    );
+    if (!allCourses) {
+      const fetchData = async () => {
+        const res = await courses().unwrap();
+        dispatch(setCourses(res));
+      };
+      fetchData().catch((err) =>
+        toast.error(
+          err?.data?.message || err.error || "Error status: " + err.status
+        )
+      );
+    }
   }, [allCourses]);
 
   return (
