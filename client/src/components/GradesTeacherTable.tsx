@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import GradeDetailsDialog from "./GradeDetailsDialog";
 
 function GradesTeacherTable({ gradesByCourse }) {
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <table className="table-auto bg-white rounded-md px-12 w-full">
       <thead>
@@ -23,9 +33,15 @@ function GradesTeacherTable({ gradesByCourse }) {
                   student.grades.map((grade, index) => (
                     <div
                       key={index}
-                      className="bg-primary rounded px-4 py-2 text-lg inline-block text-white text-bold"
+                      className="bg-primary rounded px-4 py-2 text-lg inline-block text-white text-bold cursor-pointer"
+                      onClick={openModal}
                     >
                       {grade.value}
+                      <GradeDetailsDialog
+                        closeModal={closeModal}
+                        isOpen={isOpen}
+                        grade={grade}
+                      />
                     </div>
                   ))
                 ) : (
