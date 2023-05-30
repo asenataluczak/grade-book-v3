@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "grades/:id",
+        path: "grades/:courseId",
         element: (
           <Protected conditions={[isTeacher, isAdmin]} fallback="dashboard">
             <GradesTeacherScreen />

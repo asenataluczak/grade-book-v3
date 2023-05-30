@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen, setIsOpen, userInfo }) {
   const { allCourses } = useSelector((state) => state.courses);
 
   useEffect(() => {
-    if (!allCourses) {
+    if (!allCourses.length) {
       const fetchData = async () => {
         const res = await courses().unwrap();
         dispatch(setCourses(res));
