@@ -7,6 +7,7 @@ const Grade = db.grades;
 
 const getGradesByCourse = asyncHandler(async (req, res) => {
   const students = await User.findAll({ where: { role: 2 } });
+  const teachers = await User.findAll({ where: { role: 0 || 1 }, raw: true });
   const course = await Course.findByPk(req.params.courseId);
   let grades = [];
   students.forEach((student) =>
@@ -17,9 +18,13 @@ const getGradesByCourse = asyncHandler(async (req, res) => {
     raw: true,
   });
   grades.forEach((val, i) => {
-    const gradesPerCourse = rawGrades.filter(
-      (grade) => grade.userId === val.studentId
-    );
+    const gradesPerCourse = rawGrades.filter((grade, i) => {
+      return grade.userId === val.studentId;
+    });
+    gradesPerCourse.forEach((grade, i) => {
+      const teacher = teachers.find((t) => t.id === grade.authorId);
+      grade.authorName = teacher.fullname;
+    });
     grades[i] = { ...val, grades: gradesPerCourse };
   });
   if (grades) {
